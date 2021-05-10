@@ -1,0 +1,46 @@
+version: "2.0"
+intents:
+  - reserve_request
+  - table_entry
+  - inform
+  - greet
+  - goodbye
+  - bot_challenge
+  - Allowed_time
+
+entities:
+  - seats
+  - section
+
+slots:
+  seats:
+    type: float
+    min_value: -100.0
+    max_value:  100.0
+  section:
+    type: text
+
+responses:
+  utter_table_req:
+    - text: "How many seats would you like to reserve "
+
+  utter_AC_section:
+    - text: "Which section would you like to book"
+      buttons:
+      - title: "AC"
+        payload: '/inform{{"section": "AC"}}'
+      - title: "Non-AC"
+        payload: '/inform{{"section": "Non-AC"}}'
+
+  utter_show_selection:
+    - text: "You have reserved {seats} seats in our {section} section for 7:30pm. Thanks!"
+
+actions:
+  - action_ntables
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
